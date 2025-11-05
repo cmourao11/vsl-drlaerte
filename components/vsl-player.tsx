@@ -7,38 +7,88 @@ export default function VSLPlayer() {
   const [showButton, setShowButton] = useState(false)
   const [timeLeft, setTimeLeft] = useState(15 * 60) // 15 minutos em segundos
   const [countdownStarted, setCountdownStarted] = useState(false)
-  const [videoDuration, setVideoDuration] = useState(0)
   const videoRef = useRef<HTMLVideoElement>(null)
+  const playerRef = useRef<any>(null)
 
-  const VIDEO_URL =
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Bloco_2_a_202510312123_crghy-TyCK2ArJmxkSZZFkBFDgc7dDdiwd3s.mp4"
+  const VIDEO_URL = "https://youtube.com/shorts/PQifsOM8INw?feature=share"
   const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/H3ywUmbhXjZDkLiROUlPLx?mode=wwt"
+  const BUTTON_APPEAR_TIME = 129 // 2 minutos e 9 segundos
+
+  const isYouTubeUrl = (url: string) => {
+    return url.includes("youtube.com") || url.includes("youtu.be")
+  }
+
+  const getYouTubeVideoId = (url: string) => {
+    const patterns = [
+      /(?:youtube\.com\/shorts\/)([\w-]+)/,
+      /(?:youtube\.com\/watch\?v=)([\w-]+)/,
+      /(?:youtu\.be\/)([\w-]+)/,
+      /(?:youtube\.com\/embed\/)([\w-]+)/,
+    ]
+
+    for (const pattern of patterns) {
+      const match = url.match(pattern)
+      if (match) return match[1]
+    }
+    return null
+  }
+
+  const isYouTube = isYouTubeUrl(VIDEO_URL)
+  const youtubeVideoId = isYouTube ? getYouTubeVideoId(VIDEO_URL) : null
 
   useEffect(() => {
+    if (!isYouTube || !youtubeVideoId) return
+
+    // Load YouTube iframe API
+    const tag = document.createElement("script")
+    tag.src = "https://www.youtube.com/iframe_api"
+    const firstScriptTag = document.getElementsByTagName("script")[0]
+    firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag)
+
+    // @ts-ignore
+    window.onYouTubeIframeAPIReady = () => {
+      // @ts-ignore
+      playerRef.current = new window.YT.Player("youtube-player", {
+        events: {
+          onReady: (event: any) => {
+            // Check video time every second
+            const interval = setInterval(() => {
+              if (playerRef.current && playerRef.current.getCurrentTime) {
+                const currentTime = playerRef.current.getCurrentTime()
+                if (currentTime >= BUTTON_APPEAR_TIME && !showButton) {
+                  setShowButton(true)
+                  setCountdownStarted(true)
+                  clearInterval(interval)
+                }
+              }
+            }, 1000)
+          },
+        },
+      })
+    }
+  }, [isYouTube, youtubeVideoId, showButton])
+
+  useEffect(() => {
+    if (isYouTube) return // Skip for YouTube videos - handled by iframe API
+
     const video = videoRef.current
     if (!video) return
 
-    const handleLoadedMetadata = () => {
-      setVideoDuration(video.duration)
-    }
-
     const handleTimeUpdate = () => {
-      const timeRemaining = video.duration - video.currentTime
+      const currentTime = video.currentTime
 
-      if (timeRemaining <= 60 && !showButton) {
+      if (currentTime >= BUTTON_APPEAR_TIME && !showButton) {
         setShowButton(true)
         setCountdownStarted(true)
       }
     }
 
-    video.addEventListener("loadedmetadata", handleLoadedMetadata)
     video.addEventListener("timeupdate", handleTimeUpdate)
 
     return () => {
-      video.removeEventListener("loadedmetadata", handleLoadedMetadata)
       video.removeEventListener("timeupdate", handleTimeUpdate)
     }
-  }, [showButton])
+  }, [showButton, isYouTube])
 
   // Countdown timer
   useEffect(() => {
@@ -68,16 +118,29 @@ export default function VSLPlayer() {
       <div className="max-w-7xl mx-auto">
         <div className="relative w-full mx-auto mb-8">
           <div className="relative aspect-video w-full max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-2xl shadow-primary/20 border border-primary/20 bg-black">
-            <video
-              ref={videoRef}
-              className="w-full h-full object-contain"
-              controls
-              playsInline
-              controlsList="nodownload"
-            >
-              <source src={VIDEO_URL} type="video/mp4" />
-              Seu navegador não suporta vídeos HTML5.
-            </video>
+            {isYouTube && youtubeVideoId ? (
+              <iframe
+                id="youtube-player"
+                className="w-full h-full"
+                src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&rel=0&modestbranding=1&controls=1&disablekb=1&fs=0&iv_load_policy=3&cc_load_policy=0&showinfo=0&enablejsapi=1`}
+                title="VSL Video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{ pointerEvents: "auto" }}
+              />
+            ) : (
+              <video
+                ref={videoRef}
+                className="w-full h-full object-contain"
+                controls
+                playsInline
+                autoPlay
+                controlsList="nodownload"
+              >
+                <source src={VIDEO_URL} type="video/mp4" />
+                Seu navegador não suporta vídeos HTML5.
+              </video>
+            )}
           </div>
         </div>
 
@@ -88,11 +151,10 @@ export default function VSLPlayer() {
               Como Networking e IA Vão Te Fazer Crescer no Mercado Digital
             </h1>
             <p className="md:text-xl text-muted-foreground max-w-2xl mx-auto text-pretty font-extralight text-sm">
-              O Segredo que une IA e Networking, assista ao vídeo.     
+              O Segredo que une IA e Networking, assista ao vídeo.
             </p>
           </div>
 
-          {/* CTA Button with Countdown */}
           {showButton && (
             <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
               <Button
@@ -101,7 +163,7 @@ export default function VSLPlayer() {
                 asChild
               >
                 <a href={WHATSAPP_GROUP_URL} target="_blank" rel="noopener noreferrer">
-                  Quero Garantir Minha Vaga Agora
+                  ENTRAR NO GRUPO DE WHATSAPP
                 </a>
               </Button>
 

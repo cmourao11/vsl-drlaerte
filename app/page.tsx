@@ -17,6 +17,9 @@ export default function Home() {
         />
       </div>
       <VSLPlayer />
+      <div className="relative z-10 text-center pb-8 mt-4">
+        <p className="text-sm text-muted-foreground/60">@claudio_mannarino Instagram</p>
+      </div>
     </main>
   )
 }
