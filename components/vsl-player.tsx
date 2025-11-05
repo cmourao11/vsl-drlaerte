@@ -159,7 +159,7 @@ export default function VSLPlayer() {
             <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
               <Button
                 size="lg"
-                className="text-lg px-8 py-6 h-auto bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all hover:scale-105"
+                className="text-lg px-8 py-6 h-auto bg-[#25D366] hover:bg-[#20BA5A] text-white shadow-lg shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/40 transition-all hover:scale-105"
                 asChild
               >
                 <a href={WHATSAPP_GROUP_URL} target="_blank" rel="noopener noreferrer">
