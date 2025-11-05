@@ -122,7 +122,7 @@ export default function VSLPlayer() {
               <iframe
                 id="youtube-player"
                 className="w-full h-full"
-                src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&rel=0&modestbranding=1&controls=1&disablekb=1&fs=0&iv_load_policy=3&cc_load_policy=0&showinfo=0&enablejsapi=1`}
+                src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&rel=0&modestbranding=1&controls=0&disablekb=1&fs=0&iv_load_policy=3&cc_load_policy=0&showinfo=0&enablejsapi=1`}
                 title="VSL Video"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -132,10 +132,11 @@ export default function VSLPlayer() {
               <video
                 ref={videoRef}
                 className="w-full h-full object-contain"
-                controls
                 playsInline
                 autoPlay
-                controlsList="nodownload"
+                controlsList="nodownload noplaybackrate"
+                disablePictureInPicture
+                style={{ pointerEvents: "none" }}
               >
                 <source src={VIDEO_URL} type="video/mp4" />
                 Seu navegador não suporta vídeos HTML5.
@@ -154,6 +155,9 @@ export default function VSLPlayer() {
               O Segredo que une IA e Networking, assista ao vídeo.
             </p>
           </div>
+
+          {/* Instagram Reference */}
+          <div className="text-sm text-muted-foreground/60">@claudio_mannarino Instagram</div>
 
           {showButton && (
             <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
