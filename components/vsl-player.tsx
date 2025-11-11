@@ -151,8 +151,8 @@ export default function VSLPlayer() {
             <h1 className="text-3xl md:text-5xl font-bold text-balance bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent">
               Como Networking e IA Vão Te Fazer Crescer no Mercado Digital
             </h1>
-            <p className="md:text-xl text-muted-foreground max-w-2xl mx-auto text-pretty font-extralight text-sm">
-              O Segredo que une IA e Networking, assista ao vídeo.
+            <p className="md:text-xl max-w-2xl mx-auto text-pretty font-extralight text-sm text-[rgba(53,217,12,1)]">
+              ASSISTA ATÉ O FINAL PARA LIBERAR O ACESSO            
             </p>
           </div>
 
