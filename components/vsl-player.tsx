@@ -148,7 +148,7 @@ export default function VSLPlayer() {
         {/* Content Below Video */}
         <div className="text-center space-y-8">
           <div className="space-y-4">
-            <h1 className="text-3xl md:text-5xl font-bold text-balance bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent">
+            <h1 className="text-3xl font-bold text-balance bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent tracking-tighter my-4 px-0 mx-0 border-4 md:text-4xl">
               Como Networking e IA Vão Te Fazer Crescer no Mercado Digital
             </h1>
             <p className="md:text-xl max-w-2xl mx-auto text-pretty font-extralight text-sm text-[rgba(53,217,12,1)]">
