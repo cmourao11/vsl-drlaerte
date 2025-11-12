@@ -1,6 +1,6 @@
-import VSLPlayer from "@/components/vsl-player"
 import FloatingElements from "@/components/floating-elements"
 import Image from "next/image"
+import VimeoVSLPlayer from "@/components/vimeo-vsl-player"
 
 export default function Home() {
   return (
@@ -16,9 +16,21 @@ export default function Home() {
           priority
         />
       </div>
-      <VSLPlayer />
-      <div className="relative z-10 text-center pb-8 mt-4">
-        
+      <div className="container mx-auto px-4 py-8 md:py-12 relative z-10">
+        <VimeoVSLPlayer />
+
+        <div className="mt-6 text-center">
+          
+        </div>
+
+        <div className="mt-12 max-w-3xl mx-auto text-center space-y-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-balance bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent">
+            TODO MUNDO ESTÁ CEGO OLHANDO PARA A IA
+          </h2>
+          <p className="text-lg text-muted-foreground text-pretty">
+            O maior hub está aqui! faça parte dos 1%        
+          </p>
+        </div>
       </div>
     </main>
   )

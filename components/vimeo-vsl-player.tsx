@@ -1,0 +1,100 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
+
+// Tempo em segundos quando o botão deve aparecer (1:59 = 119 segundos)
+const BUTTON_APPEAR_TIME = 119
+
+// Tempo da contagem regressiva em minutos
+const COUNTDOWN_MINUTES = 15
+
+export default function VimeoVSLPlayer() {
+  const [showButton, setShowButton] = useState(false)
+  const [timeRemaining, setTimeRemaining] = useState(COUNTDOWN_MINUTES * 60)
+
+  useEffect(() => {
+    // Carregar o script da API do Vimeo
+    const script = document.createElement("script")
+    script.src = "https://player.vimeo.com/api/player.js"
+    script.async = true
+    document.body.appendChild(script)
+
+    script.onload = () => {
+      // @ts-ignore - Vimeo Player API
+      const player = new window.Vimeo.Player("vimeo-player")
+
+      // Monitorar o tempo do vídeo
+      player.on("timeupdate", (data: { seconds: number }) => {
+        if (data.seconds >= BUTTON_APPEAR_TIME && !showButton) {
+          setShowButton(true)
+        }
+      })
+    }
+
+    return () => {
+      document.body.removeChild(script)
+    }
+  }, [showButton])
+
+  // Contagem regressiva
+  useEffect(() => {
+    if (!showButton) return
+
+    const interval = setInterval(() => {
+      setTimeRemaining((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval)
+          return 0
+        }
+        return prev - 1
+      })
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [showButton])
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60)
+    const secs = seconds % 60
+    return `${mins}:${secs.toString().padStart(2, "0")}`
+  }
+
+  return (
+    <div className="w-full max-w-2xl mx-auto space-y-6">
+      {/* Container do vídeo com proporção exata do Vimeo */}
+      <div className="relative w-full" style={{ padding: "179.17% 0 0 0" }}>
+        <iframe
+          id="vimeo-player"
+          src="https://player.vimeo.com/video/1136281028?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&loop=1&controls=0"
+          frameBorder="0"
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          title="O maior Hub de Serviços do Brasil está aqui!"
+          className="absolute top-0 left-0 w-full h-full rounded-lg shadow-2xl hover:shadow-xl transition-all duration-300 hover:scale-105"
+        />
+      </div>
+
+      {/* Botão e contagem regressiva */}
+      {showButton && (
+        <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <Button
+            asChild
+            size="lg"
+            className="w-full text-lg font-bold py-6 bg-[#25D366] hover:bg-[#20BA5A] text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+          >
+            <Link href="/grupo">ENTRAR NO GRUPO DE WHATSAPP</Link>
+          </Button>
+
+          <div className="text-center">
+            <p className="text-red-500 font-bold text-sm flex items-center justify-center gap-2">
+              <span className="inline-block w-2 h-2 bg-red-500 rounded-full animate-pulse" />O convite do grupo é válido
+              por: {formatTime(timeRemaining)}
+            </p>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
