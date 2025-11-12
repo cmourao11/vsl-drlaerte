@@ -13,6 +13,7 @@ export default function VSLPlayer() {
   const VIDEO_URL = "https://youtube.com/shorts/PQifsOM8INw?feature=share"
   const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/H3ywUmbhXjZDkLiROUlPLx?mode=wwt"
   const BUTTON_APPEAR_TIME = 129 // 2 minutos e 9 segundos
+  const BUTTON_REDIRECT_URL = "/grupo"
 
   const isYouTubeUrl = (url: string) => {
     return url.includes("youtube.com") || url.includes("youtu.be")
@@ -149,10 +150,10 @@ export default function VSLPlayer() {
         <div className="text-center space-y-8">
           <div className="space-y-4">
             <h1 className="text-3xl font-bold text-balance bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent tracking-tighter my-4 px-0 mx-0 border-4 md:text-4xl">
-              Como Networking e IA Vão Te Fazer Crescer no Mercado Digital
+              TODO MUNDO ESTÁ CEGO OLHANDO PARA A IA
             </h1>
             <p className="md:text-xl max-w-2xl mx-auto text-pretty font-extralight text-sm text-[rgba(53,217,12,1)]">
-              ASSISTA ATÉ O FINAL PARA LIBERAR O ACESSO            
+              O segredo não é a IA. É o que você faz com ela e como você usa seu networking para aplicar.               
             </p>
           </div>
 
@@ -166,9 +167,7 @@ export default function VSLPlayer() {
                 className="text-lg px-8 py-6 h-auto bg-[#25D366] hover:bg-[#20BA5A] text-white shadow-lg shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/40 transition-all hover:scale-105"
                 asChild
               >
-                <a href={WHATSAPP_GROUP_URL} target="_blank" rel="noopener noreferrer">
-                  ENTRAR NO GRUPO DE WHATSAPP
-                </a>
+                <a href={BUTTON_REDIRECT_URL}>ENTRAR NO GRUPO DE WHATSAPP</a>
               </Button>
 
               {/* Countdown Timer */}
@@ -190,7 +189,7 @@ export default function VSLPlayer() {
               <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
                 <div className="w-2 h-2 rounded-full bg-primary" />
               </div>
-              <span className="text-[rgba(15,221,60,1)]">Acesse a comunidade no WhatsApp </span>
+              <span className="text-[rgba(15,221,60,1)]">Na nossa comunidade, você terá acesso às melhores empresas de marketing do Brasil                      </span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
