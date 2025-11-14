@@ -25,10 +25,10 @@ export default function Home() {
 
         <div className="mt-12 max-w-3xl mx-auto text-center space-y-6">
           <h2 className="text-3xl md:text-4xl font-bold text-balance bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent">
-            TODO MUNDO ESTÁ CEGO OLHANDO PARA A IA
+            FAÇA PARTE DO MAIOR HUB DE SERVIÇOS DO BRASIL              
           </h2>
           <p className="text-lg text-muted-foreground text-pretty">
-            O maior hub está aqui! faça parte dos 1%        
+            Toque no botão acima e aguarda a aprovação da sua entrada                       
           </p>
         </div>
       </div>
