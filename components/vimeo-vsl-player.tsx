@@ -51,7 +51,9 @@ export default function VimeoVSLPlayer() {
           size="lg"
           className="w-full text-lg font-bold py-6 bg-[#25D366] hover:bg-[#20BA5A] text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
         >
-          <Link href="/grupo">ENTRAR NO GRUPO DE WHATSAPP</Link>
+          <a href="https://chat.whatsapp.com/H3ywUmbhXjZDkLiROUlPLx?mode=wwt" target="_blank" rel="noopener noreferrer">
+            ENTRAR NO GRUPO DE WHATSAPP
+          </a>
         </Button>
 
         <div className="text-center">
