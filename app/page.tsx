@@ -28,7 +28,7 @@ export default function Home() {
             FAÇA PARTE DO MAIOR HUB DE SERVIÇOS DO BRASIL              
           </h2>
           <p className="text-lg text-muted-foreground text-pretty">
-            Toque no botão acima e aguarda a aprovação da sua entrada                       
+            Toque no botão acima e aguarde a aprovação da sua entrada                       
           </p>
         </div>
       </div>

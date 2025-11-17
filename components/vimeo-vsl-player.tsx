@@ -51,8 +51,8 @@ export default function VimeoVSLPlayer() {
           size="lg"
           className="w-full text-lg font-bold py-6 bg-[#25D366] hover:bg-[#20BA5A] text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
         >
-          <a href="https://chat.whatsapp.com/H3ywUmbhXjZDkLiROUlPLx?mode=wwt" target="_blank" rel="noopener noreferrer">
-            ENTRAR NO GRUPO DE WHATSAPP
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_0nKOglj0jolKO7YFHDNbcD3IIGTACw59oop3c6zfbaEc2w/viewform?usp=dialog" target="_blank" rel="noopener noreferrer">
+            SOLICITAR ANÁLISE DE ACESSO
           </a>
         </Button>
 
