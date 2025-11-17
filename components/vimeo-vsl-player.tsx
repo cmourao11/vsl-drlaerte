@@ -52,14 +52,13 @@ export default function VimeoVSLPlayer() {
           className="w-full text-lg font-bold py-6 bg-[#25D366] hover:bg-[#20BA5A] text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
         >
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_0nKOglj0jolKO7YFHDNbcD3IIGTACw59oop3c6zfbaEc2w/viewform?usp=dialog" target="_blank" rel="noopener noreferrer">
-            SOLICITAR ANÁLISE DE ACESSO
+            QUERO FAZER PARTE DO GRUPO
           </a>
         </Button>
 
         <div className="text-center">
           <p className="text-red-500 font-bold text-sm flex items-center justify-center gap-2">
-            <span className="inline-block w-2 h-2 bg-red-500 rounded-full animate-pulse" />O convite do grupo é válido
-            por: {formatTime(timeRemaining)}
+            <span className="inline-block w-2 h-2 bg-red-500 rounded-full animate-pulse" />Analisamos todos os cadastros para aumentar a qualidade do networking
           </p>
         </div>
       </div>
