@@ -24,7 +24,7 @@ export default function Home() {
 
         <section className="mt-12 max-w-3xl mx-auto text-center space-y-6">
           <h1 className="text-3xl md:text-4xl font-bold text-balance bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent">
-            PRECISA APRENDER? ENTRE PARA O HUB. PRECISA ACHAR OS MELHORES EM IA, WHATSAPP, TRAFEGO,? ENTRE PARA O HUB.                                 
+            PRECISA APRENDER? ENTRE PARA O HUB. PRECISA ACHAR OS MELHORES EM IA, WHATSAPP, TRAFEGO? ENTRE PARA O HUB.                                 
           </h1>
           
         </section>
