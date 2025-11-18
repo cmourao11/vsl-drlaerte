@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
 
 // Tempo da contagem regressiva em minutos
 const COUNTDOWN_MINUTES = 15
@@ -40,8 +39,9 @@ export default function VimeoVSLPlayer() {
           frameBorder="0"
           allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
           referrerPolicy="strict-origin-when-cross-origin"
-          title="O maior Hub de Serviços do Brasil está aqui!"
+          title="Executivo Digital - Como Networking e IA Vão Te Fazer Crescer no Mercado Digital"
           className="absolute top-0 left-0 w-full h-full rounded-lg shadow-2xl hover:shadow-xl transition-all duration-300 hover:scale-105"
+          loading="eager"
         />
       </div>
 
@@ -49,16 +49,22 @@ export default function VimeoVSLPlayer() {
         <Button
           asChild
           size="lg"
-          className="w-full text-lg font-bold py-6 bg-[#25D366] hover:bg-[#20BA5A] text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+          className="w-full text-lg font-bold py-6 bg-red-600 hover:bg-red-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
         >
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_0nKOglj0jolKO7YFHDNbcD3IIGTACw59oop3c6zfbaEc2w/viewform?usp=dialog" target="_blank" rel="noopener noreferrer">
-            QUERO FAZER PARTE DO GRUPO
+          <a 
+            href="https://docs.google.com/forms/d/e/1FAIpQLSc_0nKOglj0jolKO7YFHDNbcD3IIGTACw59oop3c6zfbaEc2w/viewform?usp=dialog" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            aria-label="Solicitar análise de acesso ao grupo Executivo Digital"
+          >
+            SOLICITAR ANÁLISE DE ACESSO
           </a>
         </Button>
 
         <div className="text-center">
           <p className="text-red-500 font-bold text-sm flex items-center justify-center gap-2">
-            <span className="inline-block w-2 h-2 bg-red-500 rounded-full animate-pulse" />Analisamos todos os cadastros para aumentar a qualidade do networking
+            <span className="inline-block w-2 h-2 bg-red-500 rounded-full animate-pulse" aria-hidden="true" />
+            PREENCHA O FORMULÁRIO DE 3 PERGUNTAS SIMPLES PARA ANALISARMOS SUA ENTRADA
           </p>
         </div>
       </div>
