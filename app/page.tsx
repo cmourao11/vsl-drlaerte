@@ -23,8 +23,8 @@ export default function Home() {
         <VimeoVSLPlayer />
 
         <section className="mt-8 md:mt-12 max-w-3xl mx-auto text-center space-y-6">
-          <h1 className="text-2xl md:text-4xl font-bold text-balance bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent">
-            VOCÊ TEM A CHANCE DE ESTAR COM OS MELHORES, NA NOSSA COMUNIDADE DE WHATSAPP.                                                  
+          <h1 className="text-2xl font-bold text-balance bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent md:text-xl">
+            O acesso é restrito. O filtro é necessário. Se você se considera apto a sentar nessa mesa, toque no botão abaixo e inicie sua aplicação agora.                                                  
           </h1>
           
         </section>

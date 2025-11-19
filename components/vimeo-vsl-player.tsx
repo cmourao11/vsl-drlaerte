@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
-import Script from "next/script"
 import { Volume2, VolumeX } from 'lucide-react'
 
 // Tempo da contagem regressiva em minutos
@@ -20,6 +19,51 @@ export default function VimeoVSLPlayer() {
   const [showUnmuteButton, setShowUnmuteButton] = useState(true)
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const playerRef = useRef<any>(null)
+  const [vimeoLoaded, setVimeoLoaded] = useState(false)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !window.Vimeo) {
+      const script = document.createElement('script')
+      script.src = 'https://player.vimeo.com/api/player.js'
+      script.async = true
+      script.onload = () => setVimeoLoaded(true)
+      document.body.appendChild(script)
+      
+      return () => {
+        if (script.parentNode) {
+          script.parentNode.removeChild(script)
+        }
+      }
+    } else if (window.Vimeo) {
+      setVimeoLoaded(true)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!vimeoLoaded || !iframeRef.current || playerRef.current) return
+
+    const player = new window.Vimeo.Player(iframeRef.current)
+    playerRef.current = player
+
+    player.ready().then(() => {
+      player.setVolume(1).catch(() => {
+        player.setMuted(true)
+        player.play()
+      })
+
+      player.on("volumechange", (data: any) => {
+        setIsMuted(data.volume === 0 || data.muted)
+        setShowUnmuteButton(data.volume === 0 || data.muted)
+      })
+    })
+
+    return () => {
+      if (playerRef.current) {
+        playerRef.current.destroy().catch(() => {})
+        playerRef.current = null
+      }
+    }
+  }, [vimeoLoaded])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -34,28 +78,6 @@ export default function VimeoVSLPlayer() {
 
     return () => clearInterval(interval)
   }, [])
-
-  const handleVimeoLoad = () => {
-    if (!iframeRef.current || !window.Vimeo) return
-
-    const player = new window.Vimeo.Player(iframeRef.current)
-    playerRef.current = player
-
-    player.ready().then(() => {
-      // Tenta iniciar com som, mas se falhar (mobile), cai no catch ou fica mudo
-      player.setVolume(1).catch(() => {
-        // Autoplay com som bloqueado
-        player.setMuted(true)
-        player.play()
-      })
-
-      // Monitora estado do volume
-      player.on("volumechange", (data: any) => {
-        setIsMuted(data.volume === 0 || data.muted)
-        setShowUnmuteButton(data.volume === 0 || data.muted)
-      })
-    })
-  }
 
   const toggleMute = async () => {
     if (!playerRef.current) return
@@ -75,25 +97,24 @@ export default function VimeoVSLPlayer() {
 
   return (
     <div className="w-full max-w-2xl mx-auto space-y-6">
-      <Script src="https://player.vimeo.com/api/player.js" onLoad={handleVimeoLoad} strategy="afterInteractive" />
-
       <div 
         className="relative w-full max-h-[50vh] md:max-h-none overflow-hidden rounded-lg group" 
         style={{ paddingBottom: "min(179.17%, 50vh)" }}
       >
-        <iframe
-          ref={iframeRef}
-          id="vimeo-player"
-          src="https://player.vimeo.com/video/1136281028?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&loop=1&controls=0&muted=1"
-          frameBorder="0"
-          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-          referrerPolicy="strict-origin-when-cross-origin"
-          title="Executivo Digital - Como Networking e IA Vão Te Fazer Crescer no Mercado Digital"
-          className="absolute top-0 left-0 w-full h-full shadow-2xl"
-          loading="eager"
-        />
+        <div className="absolute inset-0 w-full h-full">
+          <iframe
+            ref={iframeRef}
+            id="vimeo-player"
+            src="https://player.vimeo.com/video/1136281028?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&loop=1&controls=0&muted=1"
+            frameBorder="0"
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            title="Executivo Digital - Como Networking e IA Vão Te Fazer Crescer no Mercado Digital"
+            className="w-full h-full shadow-2xl"
+            loading="eager"
+          />
+        </div>
 
-        {/* Botão de Unmute Overlay */}
         {showUnmuteButton && (
           <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
             <button
@@ -106,7 +127,6 @@ export default function VimeoVSLPlayer() {
           </div>
         )}
         
-        {/* Botão discreto de volume no canto (opcional, para controle posterior) */}
         {!showUnmuteButton && (
           <button
             onClick={toggleMute}
@@ -133,13 +153,6 @@ export default function VimeoVSLPlayer() {
             ENVIAR MINHA INSCRIÇÃO
           </a>
         </Button>
-
-        <div className="text-center">
-          <p className="text-green-600 font-bold text-sm flex items-center justify-center gap-2">
-            <span className="inline-block w-2 h-2 bg-green-600 rounded-full animate-pulse" aria-hidden="true" />
-            PREENCHA O FORMULÁRIO DE 3 PERGUNTAS SIMPLES PARA ANALISARMOS SUA ENTRADA
-          </p>
-        </div>
       </div>
     </div>
   )
