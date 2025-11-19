@@ -122,7 +122,7 @@ export default function VimeoVSLPlayer() {
         <Button
           asChild
           size="lg"
-          className="w-full text-lg font-bold py-6 bg-red-600 hover:bg-red-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+          className="w-full text-lg font-bold py-6 bg-green-600 hover:bg-green-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
         >
           <a 
             href="https://docs.google.com/forms/d/e/1FAIpQLSc_0nKOglj0jolKO7YFHDNbcD3IIGTACw59oop3c6zfbaEc2w/viewform?usp=dialog" 
@@ -135,8 +135,8 @@ export default function VimeoVSLPlayer() {
         </Button>
 
         <div className="text-center">
-          <p className="text-red-500 font-bold text-sm flex items-center justify-center gap-2">
-            <span className="inline-block w-2 h-2 bg-red-500 rounded-full animate-pulse" aria-hidden="true" />
+          <p className="text-green-600 font-bold text-sm flex items-center justify-center gap-2">
+            <span className="inline-block w-2 h-2 bg-green-600 rounded-full animate-pulse" aria-hidden="true" />
             PREENCHA O FORMULÁRIO DE 3 PERGUNTAS SIMPLES PARA ANALISARMOS SUA ENTRADA
           </p>
         </div>
