@@ -7,24 +7,24 @@ export default function Home() {
     <main className="min-h-screen vsl-gradient relative">
       <FloatingElements />
       
-      <header className="relative z-10 pt-8 pb-4 flex justify-center text-center">
+      <header className="relative z-10 pt-4 md:pt-8 pb-2 md:pb-4 flex justify-center text-center">
         <Image
           src="/logo.png"
           alt="Executivo Digital - Hub de Networking e IA para o Mercado Digital"
           width={400}
           height={80}
-          className="w-auto h-12 md:h-16"
+          className="w-auto h-10 md:h-16"
           priority
           quality={90}
         />
       </header>
 
-      <article className="container mx-auto px-4 py-8 md:py-12 relative z-10">
+      <article className="container mx-auto px-4 py-4 md:py-12 relative z-10">
         <VimeoVSLPlayer />
 
-        <section className="mt-12 max-w-3xl mx-auto text-center space-y-6">
-          <h1 className="text-3xl md:text-4xl font-bold text-balance bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent">
-            PRECISA APRENDER? ENTRE PARA O HUB. PRECISA ACHAR OS MELHORES EM IA, WHATSAPP, TRAFEGO? ENTRE PARA O HUB.                                 
+        <section className="mt-8 md:mt-12 max-w-3xl mx-auto text-center space-y-6">
+          <h1 className="text-2xl md:text-4xl font-bold text-balance bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent">
+            VOCÊ TEM A CHANCE DE ESTAR COM OS MELHORES, NA NOSSA COMUNIDADE DE WHATSAPP.                                                  
           </h1>
           
         </section>
