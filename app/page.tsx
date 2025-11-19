@@ -38,7 +38,7 @@ export default function Home() {
               className="hover:text-primary transition-colors"
               aria-label="Visite o perfil do Instagram de Claudio Mannarino"
             >
-              @claudio_mannarino Instagram
+              o maior ecossistema qualificado do Brasil           
             </a>
           </p>
         </footer>
