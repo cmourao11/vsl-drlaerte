@@ -36,6 +36,19 @@ export default function InscricaoPage() {
 
       if (response.ok) {
         setSubmitted(true)
+        
+        // TRACKING: Dispara evento para o Google Tag Manager (DataLayer)
+        if (typeof window !== "undefined" && (window as any).dataLayer) {
+          (window as any).dataLayer.push({
+            event: "lead_inscrito",
+            user_data: {
+              nome: formData.nome,
+              // Não enviamos dados sensíveis como telefone por segurança/LGPD
+            }
+          });
+          console.log("Evento 'lead_inscrito' enviado para o DataLayer");
+        }
+
       } else {
         console.error("[v0] Failed to submit form")
         alert("Erro ao enviar formulário. Por favor, tente novamente.")
@@ -154,6 +167,7 @@ export default function InscricaoPage() {
 
                   <Button
                     type="submit"
+                    id="btn-enviar-inscricao" // ID PARA TRACKING DE CLIQUE
                     className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-12 text-lg mt-4"
                     disabled={loading}
                   >
