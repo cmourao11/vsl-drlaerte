@@ -41,7 +41,7 @@ export default function Home() {
               className="hover:text-primary transition-colors"
               aria-label="Visite o perfil do Instagram de Claudio Mannarino"
             >
-               Assista ao vídeo            
+               Aproveite o vídeo            
             </a>
           </p>
         </footer>
