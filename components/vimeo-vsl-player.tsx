@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
-import { Volume2, VolumeX } from "lucide-react"
+import { Volume2, VolumeX, AlertTriangle } from "lucide-react"
 
 // Tempo da contagem regressiva em minutos
 const COUNTDOWN_MINUTES = 15
@@ -139,13 +139,43 @@ export default function VimeoVSLPlayer() {
       </div>
 
       <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        
+        {/* --- BLOCO DE RETENÇÃO (Trava Mental) --- */}
+        <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            gap: '8px',
+            backgroundColor: 'rgba(255, 255, 255, 0.05)', // Fundo sutil
+            padding: '10px',
+            borderRadius: '8px',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            marginTop: '20px',
+            marginBottom: '10px'
+        }}>
+            <AlertTriangle size={20} color="#fbbf24" /> {/* Ícone de Alerta Amarelo */}
+            <p style={{ 
+                color: '#fbbf24', // Texto Amarelo/Dourado
+                fontSize: '13px', 
+                fontWeight: 'bold', 
+                textAlign: 'left', 
+                fontFamily: 'sans-serif',
+                textTransform: 'uppercase',
+                lineHeight: '1.2',
+                margin: 0
+            }}>
+                Assista ao vídeo para entender os critérios<br/>de aprovação antes de aplicar.
+            </p>
+        </div>
+        {/* --- FIM DO BLOCO --- */}
+
         <Button
           asChild
           size="lg"
           className="w-full text-lg font-bold py-6 bg-green-600 hover:bg-green-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
         >
           <a href="/inscricao" aria-label="Enviar minha inscrição para o grupo Executivo Digital">
-            ENVIAR MINHA INSCRIÇÃO
+            Enviar minha inscrição
           </a>
         </Button>
       </div>
