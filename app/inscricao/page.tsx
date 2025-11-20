@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader, CardDescription } from "@/components/ui/card"
 import FloatingElements from "@/components/floating-elements"
-import { CheckCircle2 } from "lucide-react"
+import { CheckCircle2, ArrowLeft } from "lucide-react"
 
 export default function InscricaoPage() {
   const [submitted, setSubmitted] = useState(false)
@@ -51,6 +51,15 @@ export default function InscricaoPage() {
   return (
     <main className="min-h-screen vsl-gradient relative flex flex-col">
       <FloatingElements />
+
+      <div className="absolute top-4 left-4 z-20">
+        <Button asChild variant="ghost" className="text-white hover:text-white/80 hover:bg-white/10 gap-2">
+          <Link href="/">
+            <ArrowLeft className="w-4 h-4" />
+            Voltar
+          </Link>
+        </Button>
+      </div>
 
       <header className="relative z-10 pt-4 md:pt-8 pb-2 md:pb-4 flex justify-center text-center px-4">
         <Link href="/" className="w-full max-w-3xl">
