@@ -22,15 +22,31 @@ export default function Home() {
       <article className="container mx-auto px-4 py-4 md:py-12 relative z-10">
         <VimeoVSLPlayer />
 
+        {/* --- INÍCIO DA NOVA FRASE --- */}
+        <div style={{ textAlign: 'center', marginTop: '24px', marginBottom: '8px' }}>
+            <p style={{ 
+                color: '#FFFFFF', 
+                fontSize: '16px', 
+                fontWeight: 'bold', 
+                fontFamily: 'sans-serif',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px'
+            }}>
+                VOCÊ ESTÁ PREPARADO(A)?
+            </p>
+        </div>
+        {/* --- FIM DA NOVA FRASE --- */}
+
         <section className="mt-8 md:mt-12 max-w-3xl mx-auto text-center space-y-6">
           <h1 className="font-bold text-balance bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent md:text-xs text-base">
-            O acesso é restrito. O filtro é necessário. Se você se considera apto a sentar nessa mesa, toque no botão e inicie sua aplicação agora.                                                  
+            O acesso é restrito. O filtro é necessário. Se você se considera apto a sentar nessa mesa, toque no botão e inicie sua aplicação agora.                                              
           </h1>
           
         </section>
 
         <footer className="mt-8 text-center">
-          <p className="text-sm text-muted-foreground">
+          {/* AQUI MUDEI A COR PARA BRANCO PURO */}
+          <p className="text-sm" style={{ color: '#FFFFFF', opacity: 0.9 }}>
             <a 
               href="https://instagram.com/claudio_mannarino" 
               target="_blank" 
