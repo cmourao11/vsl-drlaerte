@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
-import { Volume2, VolumeX } from 'lucide-react'
+import { Volume2, VolumeX } from "lucide-react"
 
 // Tempo da contagem regressiva em minutos
 const COUNTDOWN_MINUTES = 15
@@ -22,13 +22,13 @@ export default function VimeoVSLPlayer() {
   const [vimeoLoaded, setVimeoLoaded] = useState(false)
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && !window.Vimeo) {
-      const script = document.createElement('script')
-      script.src = 'https://player.vimeo.com/api/player.js'
+    if (typeof window !== "undefined" && !window.Vimeo) {
+      const script = document.createElement("script")
+      script.src = "https://player.vimeo.com/api/player.js"
       script.async = true
       script.onload = () => setVimeoLoaded(true)
       document.body.appendChild(script)
-      
+
       return () => {
         if (script.parentNode) {
           script.parentNode.removeChild(script)
@@ -97,8 +97,8 @@ export default function VimeoVSLPlayer() {
 
   return (
     <div className="w-full max-w-2xl mx-auto space-y-6">
-      <div 
-        className="relative w-full max-h-[50vh] md:max-h-none overflow-hidden rounded-lg group" 
+      <div
+        className="relative w-full max-h-[50vh] md:max-h-none overflow-hidden rounded-lg group"
         style={{ paddingBottom: "min(179.17%, 50vh)" }}
       >
         <div className="absolute inset-0 w-full h-full">
@@ -126,7 +126,7 @@ export default function VimeoVSLPlayer() {
             </button>
           </div>
         )}
-        
+
         {!showUnmuteButton && (
           <button
             onClick={toggleMute}
@@ -144,12 +144,7 @@ export default function VimeoVSLPlayer() {
           size="lg"
           className="w-full text-lg font-bold py-6 bg-green-600 hover:bg-green-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
         >
-          <a 
-            href="https://docs.google.com/forms/d/e/1FAIpQLSc_0nKOglj0jolKO7YFHDNbcD3IIGTACw59oop3c6zfbaEc2w/viewform?usp=dialog" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            aria-label="Enviar minha inscrição para o grupo Executivo Digital"
-          >
+          <a href="/inscricao" aria-label="Enviar minha inscrição para o grupo Executivo Digital">
             ENVIAR MINHA INSCRIÇÃO
           </a>
         </Button>

@@ -29,6 +29,14 @@
   --chart-4: oklch(0.75 0.2 285);
   --chart-5: oklch(0.6 0.23 275);
   --radius: 0.75rem;
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
 }
 
 .dark {
@@ -67,8 +75,7 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-fixture), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono", "Geist Mono Fallback";
+  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -116,13 +123,11 @@
   }
 }
 
-/* Added gradient background effect for VSL page */
 .vsl-gradient {
   background: radial-gradient(ellipse 80% 50% at 50% -20%, oklch(0.35 0.25 280 / 0.4), transparent),
     radial-gradient(ellipse 60% 40% at 50% 120%, oklch(0.3 0.28 290 / 0.3), transparent);
 }
 
-/* Adding floating animation keyframes for subtle background elements */
 @keyframes float-slow {
   0%,
   100% {
