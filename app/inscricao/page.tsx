@@ -5,16 +5,17 @@ import type React from "react"
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/navigation" // Importante para redirecionar
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader, CardDescription } from "@/components/ui/card"
 import FloatingElements from "@/components/floating-elements"
-import { CheckCircle2, ArrowLeft } from "lucide-react"
+import { ArrowLeft } from "lucide-react"
 
 export default function InscricaoPage() {
-  const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const router = useRouter() // Ferramenta de navegação
   const [formData, setFormData] = useState({
     whatsapp: "",
     nome: "",
@@ -34,29 +35,18 @@ export default function InscricaoPage() {
         body: JSON.stringify(formData),
       })
 
+      // AQUI ESTÁ A MÁGICA
       if (response.ok) {
-        setSubmitted(true)
-        
-        // TRACKING: Dispara evento para o Google Tag Manager (DataLayer)
-        if (typeof window !== "undefined" && (window as any).dataLayer) {
-          (window as any).dataLayer.push({
-            event: "lead_inscrito",
-            user_data: {
-              nome: formData.nome,
-              // Não enviamos dados sensíveis como telefone por segurança/LGPD
-            }
-          });
-          console.log("Evento 'lead_inscrito' enviado para o DataLayer");
-        }
-
+        // Se o envio foi sucesso, joga o usuário para a página /obrigado
+        router.push("/obrigado")
       } else {
         console.error("[v0] Failed to submit form")
         alert("Erro ao enviar formulário. Por favor, tente novamente.")
+        setLoading(false)
       }
     } catch (error) {
       console.error("[v0] Error submitting form:", error)
       alert("Erro ao enviar formulário. Por favor, tente novamente.")
-    } finally {
       setLoading(false)
     }
   }
@@ -89,94 +79,72 @@ export default function InscricaoPage() {
 
       <div className="container mx-auto px-4 py-8 relative z-10 flex-1 flex items-center justify-center">
         <Card className="w-full max-w-lg bg-black/40 border-white/10 backdrop-blur-md shadow-2xl">
-          {submitted ? (
-            <CardContent className="pt-10 pb-10 text-center space-y-6">
-              <div className="flex justify-center">
-                <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center">
-                  <CheckCircle2 className="w-10 h-10 text-green-500" />
-                </div>
-              </div>
+          <CardHeader className="space-y-4 border-b border-white/10 pb-6">
+            <div className="space-y-2">
+              <CardDescription className="text-gray-300 text-base">
+                Este formulário é o filtro para manter o nível da nossa comunidade.
+              </CardDescription>
+            </div>
+            <div className="space-y-2 text-sm text-gray-400">
+              <p>O objetivo é garantir 100% de qualificação, conectando líderes, empresários e gestores.</p>
+              <p className="text-white font-medium">
+                Preencha seus dados para análise. Se aprovado, você receberá o acesso no seu WhatsApp.
+              </p>
+            </div>
+          </CardHeader>
+          <CardContent className="pt-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
-                <h2 className="text-2xl font-bold text-white">Inscrição Recebida!</h2>
-                <p className="text-gray-300">
-                  Seus dados foram enviados para análise. Se aprovado, você receberá o acesso no seu WhatsApp.
-                </p>
+                <Label htmlFor="whatsapp" className="text-white text-base">
+                  WhatsApp <span className="text-red-500">*</span>
+                </Label>
+                <Input
+                  id="whatsapp"
+                  placeholder="(00) 00000-0000"
+                  required
+                  value={formData.whatsapp}
+                  onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-blue-500 h-12"
+                />
               </div>
-              <Button asChild className="mt-6 bg-green-600 hover:bg-green-700 text-white w-full">
-                <Link href="/">Voltar para o início</Link>
+
+              <div className="space-y-2">
+                <Label htmlFor="nome" className="text-white text-base">
+                  Nome <span className="text-red-500">*</span>
+                </Label>
+                <Input
+                  id="nome"
+                  placeholder="Seu nome completo"
+                  required
+                  value={formData.nome}
+                  onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-blue-500 h-12"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="atuacao" className="text-white text-base">
+                  Sua área de atuação <span className="text-red-500">*</span>
+                </Label>
+                <Input
+                  id="atuacao"
+                  placeholder="Ex: Gestor, Figura Pública, Empresário(a)..."
+                  required
+                  value={formData.atuacao}
+                  onChange={(e) => setFormData({ ...formData, atuacao: e.target.value })}
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-blue-500 h-12"
+                />
+              </div>
+
+              <Button
+                type="submit"
+                className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-12 text-lg mt-4"
+                disabled={loading}
+              >
+                {loading ? "Enviando..." : "ENVIAR"}
               </Button>
-            </CardContent>
-          ) : (
-            <>
-              <CardHeader className="space-y-4 border-b border-white/10 pb-6">
-                <div className="space-y-2">
-                  <CardDescription className="text-gray-300 text-base">
-                    Este formulário é o filtro para manter o nível da nossa comunidade.
-                  </CardDescription>
-                </div>
-                <div className="space-y-2 text-sm text-gray-400">
-                  <p>O objetivo é garantir 100% de qualificação, conectando líderes, empresários e gestores.</p>
-                  <p className="text-white font-medium">
-                    Preencha seus dados para análise. Se aprovado, você receberá o acesso no seu WhatsApp.
-                  </p>
-                </div>
-              </CardHeader>
-              <CardContent className="pt-6">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="whatsapp" className="text-white text-base">
-                      WhatsApp <span className="text-red-500">*</span>
-                    </Label>
-                    <Input
-                      id="whatsapp"
-                      placeholder="(00) 00000-0000"
-                      required
-                      value={formData.whatsapp}
-                      onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
-                      className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-blue-500 h-12"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="nome" className="text-white text-base">
-                      Nome <span className="text-red-500">*</span>
-                    </Label>
-                    <Input
-                      id="nome"
-                      placeholder="Seu nome completo"
-                      required
-                      value={formData.nome}
-                      onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
-                      className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-blue-500 h-12"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="atuacao" className="text-white text-base">
-                      Sua área de atuação <span className="text-red-500">*</span>
-                    </Label>
-                    <Input
-                      id="atuacao"
-                      placeholder="Ex: Gestor, Figura Pública, Empresário(a)..."
-                      required
-                      value={formData.atuacao}
-                      onChange={(e) => setFormData({ ...formData, atuacao: e.target.value })}
-                      className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-blue-500 h-12"
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    id="btn-enviar-inscricao" // ID PARA TRACKING DE CLIQUE
-                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold h-12 text-lg mt-4"
-                    disabled={loading}
-                  >
-                    {loading ? "Enviando..." : "ENVIAR"}
-                  </Button>
-                </form>
-              </CardContent>
-            </>
-          )}
+            </form>
+          </CardContent>
         </Card>
       </div>
     </main>
