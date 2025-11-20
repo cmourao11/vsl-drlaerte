@@ -14,7 +14,7 @@ export async function POST(request: Request) {
     }
 
     // 2. Configuração da URL:
-    // A URL está inserida aqui diretamente para garantir que funciona sem configurações extra.
+    // A URL do seu Web App do Google Apps Script
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzNFfKxdD29EYORR77SWkUp9fXpXelqLE0Nida--lP05eKglEjhsmHwxckKhbt9v9Zc/exec"
     
     // O código tenta usar variáveis de ambiente, mas usa a SCRIPT_URL se falhar.
