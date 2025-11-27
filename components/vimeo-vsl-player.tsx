@@ -132,12 +132,12 @@ export default function VimeoVSLPlayer() {
           <iframe
             ref={iframeRef}
             id="vimeo-player"
-            src="https://player.vimeo.com/video/1140928444?autoplay=1&loop=0&muted=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&autopause=0&dnt=1"
+            src="https://player.vimeo.com/video/1140928444?autoplay=1&loop=0&muted=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&autopause=0&dnt=1&background=1"
             frameBorder="0"
             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
             title="Dr Laerte - VSL 1"
-            className="w-full h-full"
+            className="w-full h-full pointer-events-none"
             loading="eager"
           />
         </div>
