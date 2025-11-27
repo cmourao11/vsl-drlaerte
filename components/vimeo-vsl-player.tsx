@@ -1,77 +1,14 @@
 "use client"
 
-import React, { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Volume2, VolumeX, AlertTriangle, Play, Pause } from "lucide-react"
+import { AlertTriangle } from "lucide-react"
 
 // Tempo da contagem regressiva em minutos
 const COUNTDOWN_MINUTES = 15
 
-declare global {
-  interface Window {
-    Vimeo: any
-  }
-}
-
 export default function VimeoVSLPlayer() {
   const [timeRemaining, setTimeRemaining] = useState(COUNTDOWN_MINUTES * 60)
-  const [isMuted, setIsMuted] = useState(true)
-  const [isPlaying, setIsPlaying] = useState(true)
-  const [showControls, setShowControls] = useState(false)
-  const iframeRef = useRef<HTMLIFrameElement>(null)
-  const playerRef = useRef<any>(null)
-  const [vimeoLoaded, setVimeoLoaded] = useState(false)
-
-  useEffect(() => {
-    if (typeof window !== "undefined" && !window.Vimeo) {
-      const script = document.createElement("script")
-      script.src = "https://player.vimeo.com/api/player.js"
-      script.async = true
-      script.onload = () => setVimeoLoaded(true)
-      document.body.appendChild(script)
-
-      return () => {
-        if (script.parentNode) {
-          script.parentNode.removeChild(script)
-        }
-      }
-    } else if (window.Vimeo) {
-      setVimeoLoaded(true)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (!vimeoLoaded || !iframeRef.current || playerRef.current) return
-
-    const player = new window.Vimeo.Player(iframeRef.current)
-    playerRef.current = player
-
-    player.ready().then(() => {
-      // Tenta iniciar com som, se falhar, inicia mudo
-      player.setVolume(1).then(() => {
-        player.setMuted(false)
-        setIsMuted(false)
-      }).catch(() => {
-        player.setMuted(true)
-        setIsMuted(true)
-        player.play()
-      })
-
-      player.on("volumechange", (data: any) => {
-        setIsMuted(data.volume === 0 || data.muted)
-      })
-
-      player.on("play", () => setIsPlaying(true))
-      player.on("pause", () => setIsPlaying(false))
-    })
-
-    return () => {
-      if (playerRef.current) {
-        playerRef.current.destroy().catch(() => { })
-        playerRef.current = null
-      }
-    }
-  }, [vimeoLoaded])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -87,106 +24,27 @@ export default function VimeoVSLPlayer() {
     return () => clearInterval(interval)
   }, [])
 
-  const toggleMute = async (e: React.MouseEvent) => {
-    e.stopPropagation()
-    if (!playerRef.current) return
-
-    try {
-      if (isMuted) {
-        await playerRef.current.setVolume(1)
-        await playerRef.current.setMuted(false)
-      } else {
-        await playerRef.current.setVolume(0)
-        await playerRef.current.setMuted(true)
-      }
-    } catch (error) {
-      console.error("Erro ao alterar volume:", error)
-    }
-  }
-
-  const togglePlay = async (e?: React.MouseEvent) => {
-    if (e) e.stopPropagation()
-    if (!playerRef.current) return
-
-    try {
-      if (isPlaying) {
-        await playerRef.current.pause()
-      } else {
-        await playerRef.current.play()
-      }
-    } catch (error) {
-      console.error("Erro ao alterar reprodução:", error)
-    }
-  }
-
   return (
     <div className="w-full max-w-2xl mx-auto space-y-6">
-      <div
-        className="relative w-full max-h-[50vh] md:max-h-none overflow-hidden rounded-lg group shadow-2xl bg-black"
-        style={{ paddingBottom: "min(179.17%, 50vh)" }}
-        onMouseEnter={() => setShowControls(true)}
-        onMouseLeave={() => setShowControls(false)}
-        onClick={() => togglePlay()}
-      >
-        <div className="absolute inset-0 w-full h-full">
-          <iframe
-            ref={iframeRef}
-            id="vimeo-player"
-            src="https://player.vimeo.com/video/1140928444?autoplay=1&loop=0&muted=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&autopause=0&dnt=1&background=1"
-            frameBorder="0"
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            title="Dr Laerte - VSL 1"
-            className="w-full h-full pointer-events-none"
-            loading="eager"
-          />
-        </div>
-
-        {/* Custom Controls Overlay */}
-        <div
-          className={`absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent transition-opacity duration-300 flex items-center justify-between z-20 ${showControls || !isPlaying ? 'opacity-100' : 'opacity-0'}`}
-          onClick={(e) => e.stopPropagation()} // Prevent clicking bar from toggling play
-        >
-          {/* Play/Pause Button */}
-          <button
-            onClick={togglePlay}
-            className="text-white hover:text-primary transition-colors p-2 rounded-full hover:bg-white/10"
-            aria-label={isPlaying ? "Pausar" : "Reproduzir"}
-          >
-            {isPlaying ? <Pause className="w-8 h-8 fill-current" /> : <Play className="w-8 h-8 fill-current" />}
-          </button>
-
-          {/* Mute/Unmute Button */}
-          <button
-            onClick={toggleMute}
-            className="text-white hover:text-primary transition-colors p-2 rounded-full hover:bg-white/10"
-            aria-label={isMuted ? "Ativar som" : "Desativar som"}
-          >
-            {isMuted ? <VolumeX className="w-8 h-8" /> : <Volume2 className="w-8 h-8" />}
-          </button>
-        </div>
-
-        {/* Big Play Button Overlay (when paused) */}
-        {!isPlaying && (
-          <div className="absolute inset-0 flex items-center justify-center z-10 bg-black/30 pointer-events-none">
-            <div className="bg-primary/90 text-white p-6 rounded-full shadow-2xl backdrop-blur-sm animate-in fade-in zoom-in duration-300">
-              <Play className="w-12 h-12 fill-current ml-1" />
-            </div>
+      <div className="relative w-full overflow-hidden rounded-lg shadow-2xl bg-black">
+        {/* 
+          AREA DE EMBED PERSONALIZADO 
+          Cole seu código de iframe (VTurb, Panda, etc) aqui dentro.
+          Mantenha a classe 'aspect-video' para garantir a proporção 16:9.
+        */}
+        <div className="w-full aspect-video flex items-center justify-center bg-gray-900 text-gray-400">
+          <div className="text-center p-6">
+            <p className="mb-4 font-bold text-white">Área do Vídeo (Custom Embed)</p>
+            <p className="text-sm">Cole seu código de iframe aqui no arquivo <code>vimeo-vsl-player.tsx</code></p>
+            {/* 
+              EXEMPLO DE ONDE COLAR O CÓDIGO:
+              <div dangerouslySetInnerHTML={{ __html: `SEU_CODIGO_IFRAME_AQUI` }} />
+              
+              OU SE FOR APENAS UM IFRAME DIRETO:
+              <iframe src="..." ... />
+            */}
           </div>
-        )}
-
-        {/* Initial Unmute Overlay */}
-        {isMuted && isPlaying && (
-          <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
-            <button
-              onClick={toggleMute}
-              className="pointer-events-auto bg-black/70 hover:bg-black/90 text-white px-6 py-3 rounded-full font-bold flex items-center gap-3 transition-all transform hover:scale-105 backdrop-blur-sm border border-white/20 animate-pulse"
-            >
-              <VolumeX className="w-6 h-6" />
-              TOQUE PARA ATIVAR O SOM
-            </button>
-          </div>
-        )}
+        </div>
       </div>
 
       <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
