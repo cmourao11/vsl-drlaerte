@@ -3,15 +3,28 @@ import { AlertTriangle } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   const [showButton, setShowButton] = useState(false);
+  const [secondsRemaining, setSecondsRemaining] = useState(120); // 2 minutos
 
   useEffect(() => {
-    // Timer de 2 minutos (120000 ms)
-    const timer = setTimeout(() => {
-      setShowButton(true);
-    }, 120000);
+    const interval = setInterval(() => {
+      setSecondsRemaining((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          setShowButton(true);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
 
-    return () => clearTimeout(timer);
+    return () => clearInterval(interval);
   }, []);
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
 
   return (
     <section className="relative pt-20 pb-20 px-4 text-center overflow-hidden">
@@ -44,8 +57,14 @@ export const Hero: React.FC = () => {
           </div>
         </div>
 
-        {/* CTA Button - Delayed */}
-        {showButton && (
+        {/* Countdown Timer or CTA Button */}
+        {!showButton ? (
+          <div className="mt-8 text-gray-400 animate-pulse">
+            <p className="text-sm md:text-base">
+              O botão para falar com Dr. Laerte aparecerá em: <span className="font-mono font-bold text-primary text-lg">{formatTime(secondsRemaining)}</span>
+            </p>
+          </div>
+        ) : (
           <div className="mt-10 flex justify-center animate-[fadeIn_1s_ease-in]">
             <a
               href="https://w.app/arzwrb"
