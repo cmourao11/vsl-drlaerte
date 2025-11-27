@@ -59,7 +59,7 @@ export default function FloatingElements() {
         // Draw node
         ctx.beginPath()
         ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2)
-        ctx.fillStyle = "rgba(147, 51, 234, 0.6)" // Purple
+        ctx.fillStyle = "rgba(236, 189, 60, 0.6)" // Gold
         ctx.fill()
 
         // Draw connections
@@ -78,7 +78,7 @@ export default function FloatingElements() {
 
             // Opacity based on distance
             const opacity = (1 - distance / 150) * 0.3
-            ctx.strokeStyle = `rgba(139, 92, 246, ${opacity})` // Violet
+            ctx.strokeStyle = `rgba(236, 189, 60, ${opacity})` // Gold
             ctx.lineWidth = 0.5
             ctx.stroke()
           }
@@ -102,9 +102,9 @@ export default function FloatingElements() {
 
       {/* Ambient glow orbs for depth */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute top-[10%] left-[15%] w-[400px] h-[400px] rounded-full bg-purple-600/10 blur-[100px] animate-float-slow" />
+        <div className="absolute top-[10%] left-[15%] w-[400px] h-[400px] rounded-full bg-[#ecbd3c]/10 blur-[100px] animate-float-slow" />
         <div className="absolute top-[60%] right-[10%] w-[500px] h-[500px] rounded-full bg-blue-600/8 blur-[120px] animate-float-slower" />
-        <div className="absolute bottom-[20%] left-[5%] w-[450px] h-[450px] rounded-full bg-violet-600/10 blur-[110px] animate-float-medium" />
+        <div className="absolute bottom-[20%] left-[5%] w-[450px] h-[450px] rounded-full bg-[#ecbd3c]/10 blur-[110px] animate-float-medium" />
 
         {/* Subtle Law Elements in Background */}
         <div className="absolute top-[15%] right-[5%] text-primary/5 animate-float-slow rotate-12">

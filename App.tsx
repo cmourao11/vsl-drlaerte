@@ -7,7 +7,7 @@ import { ChatWidget } from './components/ChatWidget';
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-dark-surface text-gray-100 selection:bg-purple-500 selection:text-white">
+    <div className="min-h-screen bg-dark-surface text-gray-100 selection:bg-[#ecbd3c] selection:text-white">
       <main className="relative">
         <Hero />
         <Features />
