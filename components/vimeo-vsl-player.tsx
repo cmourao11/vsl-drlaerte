@@ -110,7 +110,7 @@ export default function VimeoVSLPlayer() {
             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
             title="Executivo Digital - Como Networking e IA Vão Te Fazer Crescer no Mercado Digital"
-            className="w-full h-full shadow-2xl pointer-events-none"
+            className="w-full h-full shadow-2xl pointer-events-none scale-[1.20]"
             loading="eager"
           />
         </div>
