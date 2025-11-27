@@ -1,21 +1,8 @@
 import React from 'react';
-import { Scale, Gavel, Scroll, Shield } from 'lucide-react';
 
 export const About: React.FC = () => {
   return (
     <section className="py-20 px-4 bg-gradient-to-b from-dark-surface to-dark-bg relative overflow-hidden">
-      <style>
-        {`
-          @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-          }
-          .animate-float-slow { animation: float 6s ease-in-out infinite; }
-          .animate-float-medium { animation: float 4s ease-in-out infinite; }
-          .animate-float-fast { animation: float 3s ease-in-out infinite; }
-        `}
-      </style>
-
       <div className="container mx-auto max-w-4xl relative z-10">
         <div className="bg-dark-card rounded-2xl border border-gray-700 shadow-2xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 md:gap-12 relative overflow-visible">
 
@@ -29,20 +16,6 @@ export const About: React.FC = () => {
                 alt="Dr. Laerte Fonseca"
                 className="w-full h-full rounded-full object-cover"
               />
-            </div>
-
-            {/* Floating Law Elements */}
-            <div className="absolute -top-8 -left-8 text-primary/40 animate-float-slow z-10">
-              <Scale size={48} />
-            </div>
-            <div className="absolute top-1/2 -right-12 text-primary/30 animate-float-medium z-10">
-              <Gavel size={40} />
-            </div>
-            <div className="absolute -bottom-4 -left-4 text-primary/20 animate-float-fast z-10">
-              <Scroll size={36} />
-            </div>
-            <div className="absolute -bottom-8 right-0 text-primary/25 animate-float-slow z-10 delay-700">
-              <Shield size={44} />
             </div>
           </div>
 

@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import { Scale, Gavel, Landmark, Scroll } from 'lucide-react'
 
 export default function FloatingElements() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -104,6 +105,20 @@ export default function FloatingElements() {
         <div className="absolute top-[10%] left-[15%] w-[400px] h-[400px] rounded-full bg-purple-600/10 blur-[100px] animate-float-slow" />
         <div className="absolute top-[60%] right-[10%] w-[500px] h-[500px] rounded-full bg-blue-600/8 blur-[120px] animate-float-slower" />
         <div className="absolute bottom-[20%] left-[5%] w-[450px] h-[450px] rounded-full bg-violet-600/10 blur-[110px] animate-float-medium" />
+
+        {/* Subtle Law Elements in Background */}
+        <div className="absolute top-[15%] right-[5%] text-primary/5 animate-float-slow rotate-12">
+          <Scale size={300} strokeWidth={0.5} />
+        </div>
+        <div className="absolute bottom-[10%] left-[10%] text-primary/5 animate-float-slower -rotate-12">
+          <Landmark size={400} strokeWidth={0.5} />
+        </div>
+        <div className="absolute top-[40%] left-[5%] text-primary/5 animate-float-medium rotate-45">
+          <Gavel size={200} strokeWidth={0.5} />
+        </div>
+        <div className="absolute bottom-[30%] right-[15%] text-primary/5 animate-float-slow -rotate-6">
+          <Scroll size={250} strokeWidth={0.5} />
+        </div>
       </div>
     </>
   )
