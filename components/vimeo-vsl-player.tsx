@@ -55,17 +55,17 @@ export default function VimeoVSLPlayer() {
           alignItems: 'center',
           justifyContent: 'center',
           gap: '8px',
-          backgroundColor: 'rgba(255, 255, 255, 0.05)', // Fundo sutil
-          padding: '10px',
-          borderRadius: '8px',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
+          backgroundColor: 'rgba(236, 189, 60, 0.05)', // Gold sutil
+          padding: '8px',
+          borderRadius: '6px',
+          border: '1px solid rgba(236, 189, 60, 0.1)',
           marginTop: '20px',
           marginBottom: '10px'
         }}>
-          <AlertTriangle size={20} color="#fbbf24" /> {/* Ícone de Alerta Amarelo */}
+          <AlertTriangle size={18} color="#ecbd3c" /> {/* Ícone Gold */}
           <p style={{
-            color: '#fbbf24', // Texto Amarelo/Dourado
-            fontSize: '13px',
+            color: '#ecbd3c', // Texto Gold
+            fontSize: '12px',
             fontWeight: 'bold',
             textAlign: 'left',
             fontFamily: 'sans-serif',
@@ -83,7 +83,7 @@ export default function VimeoVSLPlayer() {
           size="lg"
           className="w-full text-lg font-bold py-6 bg-green-600 hover:bg-green-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
         >
-          <a href="/inscricao" aria-label="Enviar minha inscrição para o grupo Executivo Digital">
+          <a href="https://w.app/arzwrb" aria-label="Enviar minha inscrição para o grupo Executivo Digital">
             Enviar minha inscrição
           </a>
         </Button>
