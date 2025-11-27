@@ -59,7 +59,7 @@ export default function VimeoVSLPlayer() {
 
     return () => {
       if (playerRef.current) {
-        playerRef.current.destroy().catch(() => {})
+        playerRef.current.destroy().catch(() => { })
         playerRef.current = null
       }
     }
@@ -105,7 +105,7 @@ export default function VimeoVSLPlayer() {
           <iframe
             ref={iframeRef}
             id="vimeo-player"
-            src="https://player.vimeo.com/video/1136281028?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&loop=1&controls=0&muted=1"
+            src="https://player.vimeo.com/video/1136281028?autoplay=1&loop=1&muted=1&controls=0&title=0&byline=0&portrait=0&playsinline=1&autopause=0&app_id=58479"
             frameBorder="0"
             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
@@ -139,33 +139,33 @@ export default function VimeoVSLPlayer() {
       </div>
 
       <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
-        
+
         {/* --- BLOCO DE RETENÇÃO (Trava Mental) --- */}
-        <div style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center', 
-            gap: '8px',
-            backgroundColor: 'rgba(255, 255, 255, 0.05)', // Fundo sutil
-            padding: '10px',
-            borderRadius: '8px',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            marginTop: '20px',
-            marginBottom: '10px'
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '8px',
+          backgroundColor: 'rgba(255, 255, 255, 0.05)', // Fundo sutil
+          padding: '10px',
+          borderRadius: '8px',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          marginTop: '20px',
+          marginBottom: '10px'
         }}>
-            <AlertTriangle size={20} color="#fbbf24" /> {/* Ícone de Alerta Amarelo */}
-            <p style={{ 
-                color: '#fbbf24', // Texto Amarelo/Dourado
-                fontSize: '13px', 
-                fontWeight: 'bold', 
-                textAlign: 'left', 
-                fontFamily: 'sans-serif',
-                textTransform: 'uppercase',
-                lineHeight: '1.2',
-                margin: 0
-            }}>
-                Assista ao vídeo para entender os critérios<br/>de aprovação antes de aplicar.
-            </p>
+          <AlertTriangle size={20} color="#fbbf24" /> {/* Ícone de Alerta Amarelo */}
+          <p style={{
+            color: '#fbbf24', // Texto Amarelo/Dourado
+            fontSize: '13px',
+            fontWeight: 'bold',
+            textAlign: 'left',
+            fontFamily: 'sans-serif',
+            textTransform: 'uppercase',
+            lineHeight: '1.2',
+            margin: 0
+          }}>
+            Assista ao vídeo para entender os critérios<br />de aprovação antes de aplicar.
+          </p>
         </div>
         {/* --- FIM DO BLOCO --- */}
 
