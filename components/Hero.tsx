@@ -48,10 +48,10 @@ export const Hero: React.FC = () => {
         {showButton && (
           <div className="mt-10 flex justify-center animate-[fadeIn_1s_ease-in]">
             <a
-              href="#cta"
-              className="bg-primary hover:bg-primary-hover text-white font-bold text-lg md:text-xl py-4 px-10 rounded-lg shadow-lg shadow-primary/25 transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center justify-center text-center"
+              href="https://w.app/arzwrb"
+              className="bg-[#25D366] hover:bg-[#128C7E] text-white font-bold text-lg md:text-xl py-4 px-10 rounded-lg shadow-lg shadow-[#25D366]/25 transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center justify-center text-center"
             >
-              <span>QUERO RESGUARDAR MINHA GESTÃO</span>
+              <span>FALAR COM DR LAERTE</span>
               <span className="text-xs md:text-sm italic font-normal opacity-90 mt-1">
                 toque aqui e inicie uma conversa no WhatsApp
               </span>
