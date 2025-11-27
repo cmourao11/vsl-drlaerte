@@ -127,15 +127,7 @@ export default function VimeoVSLPlayer() {
           </div>
         )}
 
-        {!showUnmuteButton && (
-          <button
-            onClick={toggleMute}
-            className="absolute bottom-4 right-4 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all opacity-0 group-hover:opacity-100"
-            aria-label={isMuted ? "Ativar som" : "Desativar som"}
-          >
-            {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
-          </button>
-        )}
+
       </div>
 
       <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
